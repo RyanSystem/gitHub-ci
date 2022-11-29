@@ -1,0 +1,56 @@
+{
+	"info": {
+		"_postman_id": "c607293a-f017-483b-8e14-97fe829781ec",
+		"name": "Signup",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CEP",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"function consultaCep(){\r",
+							"    var cep = [\"62940000\", \"07176690\", \"09550300\"]\r",
+							"    var radomItem = cep[Math.floor(Math.random() * cep.length)];\r",
+							"    return radomItem;\r",
+							"}\r",
+							"pm.variables.set(\"Cep\", consultaCep());\r",
+							"pm.environment.set(\"Cep\", consultaCep());"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/{{Cep}}/json/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"{{Cep}}",
+						"json",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
